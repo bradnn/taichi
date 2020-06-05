@@ -1,0 +1,32 @@
+{
+  "name": "taichi",
+  "version": "0.1.0",
+  "description": "Public discord bot made with the user in mind.",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradnn/taichi.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Bradn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradnn/taichi/issues"
+  },
+  "homepage": "https://github.com/bradnn/taichi#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "eslint": "^7.1.0",
+    "eslint-config-tesseract": "0.0.2",
+    "glob": "^7.1.6",
+    "mongoose": "^5.9.17",
+    "ms": "^2.1.2",
+    "path": "^0.12.7",
+    "util": "^0.12.3"
+  }
+}
