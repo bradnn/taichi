@@ -27,7 +27,7 @@ module.exports = class extends Command {
         if(!message.author.id === '263789620007927813') return;
         let member = message.mentions.users.first();
         console.log(`added ${args[1]} ${type} boxes to ${member.username}`);
-        message.channel.send(`added ${args[1]} ${type} boxes to ${member.username}`);
+        message.channel.send(`added ${args[1]} ${type} boxes to ${member}`);
         if(!member === undefined){
             addBoxes(message.author.id, args[1], type);
         }else{

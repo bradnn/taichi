@@ -32,7 +32,7 @@ module.exports = class TaichiClient extends Client {
 
             if (!message.guild || message.author.bot) return;
 
-            if(Math.floor(Math.random()*999) + 1 > 990){
+            if(Math.floor(Math.random()*999) + 1 > 980){
                 if(Math.floor(Math.random()*999) + 1 > 999){
                     let coinamount = Math.floor(Math.random()*125) + 10;
     

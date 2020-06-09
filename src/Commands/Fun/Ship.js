@@ -1,5 +1,10 @@
 const Command = require('../../structures/Command.js');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, Client } = require('discord.js');
+const shipSchema = require('../../Schemas/ship.js');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://bradn:eorXgV34icTCFwWr@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority', {
+    useNewUrlParser: true
+});
 
 module.exports = class extends Command {
 
@@ -11,65 +16,135 @@ module.exports = class extends Command {
 
     // eslint-disable-next-line no-unused-vars
     async run(message, args) {
+        var firstArg = args[0];
+        var secondArg = args[1];
+        var firstid = "";
+        var secondid = "";
 
-        if(!args[0]) message.channel.send("Please give a user.");
-        if(!args[1]){
-            var first = message.author;
-            var second = message.mentions.users.first();
-            if(second === undefined){
-                var user = args[0];
-            }else{
-                var user = user.username;
-            }
-            let rating = Math.floor(Math.random()*99) + 1;
-    
-            let embed = new MessageEmbed()
-            .setDescription('❤️ **Ship**')
-            .addField('First', first, true)
-            .addField('Second', second, true)
-            .setTimestamp();
-    
-            if(rating > 70){
-                embed.setFooter('Very cute together...');
-            }else if(rating < 20){
-                embed.setFooter('Yeah might wanna stay away from eachother');
-            }else{
-                embed.setFooter('Might be good? idk...');
-            }
-            
-            message.channel.send(embed);
-        }else{
-            var first = message.mentions.users.first();
-            var second = message.mentions.users[1];
-            if(first === undefined){
-                var first = args[0];
-            }else{
-                var first = first.username;
-            }
-            if(second === undefined){
-                var second = args[1];
-            }else{
-                var second = second.username
-            }
-            let rating = Math.floor(Math.random()*99) + 1;
-    
-            let embed = new MessageEmbed()
-            .setDescription('❤️ **Ship**')
-            .addField('First', first, true)
-            .addField('Second', second, true)
-            .setTimestamp();
-    
-            if(rating > 70){
-                embed.setFooter('Very cute together...');
-            }else if(rating < 20){
-                embed.setFooter('Yeah might wanna stay away from eachother');
-            }else{
-                embed.setFooter('Might be good? idk...');
-            }
-
-            embed.addField(`Rating`, `${rating}/100`)
-            
-            message.channel.send(embed);
+        if (!firstArg) {
+            message.channel.send('Please supply a user.');
+            return;
         }
+        if (!secondArg) {
+            var secondArg = "<@" + message.author.id + ">"
+            var firstid = firstArg.slice(3, -1);
+            var secondid = message.author.id;
+
+
+            shipSchema.findOne({
+                first: firstid,
+                second: secondid
+            }, (err, ship) => {
+                if (err) console.log(err);
+
+                if (!ship) {
+                    let rating = Math.floor(Math.random() * 99) + 1;
+                    const newship = new shipSchema({
+                        first: firstid,
+                        second: secondid,
+                        ship: rating
+                    });
+
+                    newship.save();
+                    let shipEmbed = new MessageEmbed()
+                        .setTitle('💞 Ship')
+                        .addField(`🔽 First`, `${firstArg}`, true)
+                        .addField(`Rating`, `${rating}/100`, true)
+                        .addField(`🔼 Second`, `${secondArg}`, false);
+                    message.channel.send(shipEmbed);
+                } else {
+                    if (ship.second !== secondid) {
+                        let rating = Math.floor(Math.random() * 99) + 1;
+                        const newship = new shipSchema({
+                            first: firstid,
+                            second: secondid,
+                            ship: rating
+                        });
+
+                        newship.save();
+                        let shipEmbed = new MessageEmbed()
+                            .setTitle('💞 Ship')
+                            .addField(`🔽 First`, `${firstArg}`, true)
+                            .addField(`Rating`, `${rating}/100`, true)
+                            .addField(`🔼 Second`, `${secondArg}`, false);
+                        message.channel.send(shipEmbed);
+                    } else {
+                        let rating = ship.ship;
+                        let shipEmbed = new MessageEmbed()
+                            .setTitle('💞 Ship')
+                            .addField(`🔽 First`, `${firstArg}`, true)
+                            .addField(`Rating`, `${rating}/100`, true)
+                            .addField(`🔼 Second`, `${secondArg}`, false);
+                        message.channel.send(shipEmbed);
+                    }
+                }
+            });
+
+        } else {
+            if (firstArg.startsWith('<@') && firstArg.endsWith('>')) {
+                if (secondArg.startsWith('<@') && secondArg.endsWith('>')) {
+
+                    
+
+                    var firstid = firstArg.slice(3, -1);
+                    var secondid = secondArg.slice(3, -1);
+
+
+                    shipSchema.findOne({
+                        first: firstid,
+                        second: secondid
+                    }, (err, ship) => {
+                        if (err) console.log(err);
+
+                        if (!ship) {
+                            let rating = Math.floor(Math.random() * 99) + 1;
+                            const newship = new shipSchema({
+                                first: firstid,
+                                second: secondid,
+                                ship: rating
+                            });
+
+                            newship.save();
+                            let shipEmbed = new MessageEmbed()
+                                .setTitle('💞 Ship')
+                                .addField(`🔽 First`, `${firstArg}`, true)
+                                .addField(`Rating`, `${rating}/100`, true)
+                                .addField(`🔼 Second`, `${secondArg}`, false);
+                            message.channel.send(shipEmbed);
+                        } else {
+                            if (ship.second !== secondid) {
+                                let rating = Math.floor(Math.random() * 99) + 1;
+                                const newship = new shipSchema({
+                                    first: firstid,
+                                    second: secondid,
+                                    ship: rating
+                                });
+
+                                newship.save();
+                                let shipEmbed = new MessageEmbed()
+                                    .setTitle('💞 Ship')
+                                    .addField(`🔽 First`, `${firstArg}`, true)
+                                    .addField(`Rating`, `${rating}/100`, true)
+                                    .addField(`🔼 Second`, `${secondArg}`, false);
+                                message.channel.send(shipEmbed);
+                            } else {
+                                let rating = ship.ship;
+                                let shipEmbed = new MessageEmbed()
+                                    .setTitle('💞 Ship')
+                                    .addField(`🔽 First`, `${firstArg}`, true)
+                                    .addField(`Rating`, `${rating}/100`, true)
+                                    .addField(`🔼 Second`, `${secondArg}`, false);
+                                message.channel.send(shipEmbed);
+                            }
+                        }
+                    });
+                } else {
+                    message.channel.send(`Please tag this user. \`${secondArg}\``);
+                }
+            } else {
+                message.channel.send(`Please tag this user. \`${firstArg}\``);
+            }
+        }
+
     }
 };
