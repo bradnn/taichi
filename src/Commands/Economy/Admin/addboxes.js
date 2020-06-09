@@ -1,9 +1,6 @@
 const Command = require('../../../structures/Command.js');
 const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bradn:eorXgV34icTCFwWr@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority', {
-    useNewUrlParser: true
-});
 const lootboxes = require('../../../Schemas/lootbox.js');
 const addBoxes = require('../../../Functions/addBoxes.js');
 

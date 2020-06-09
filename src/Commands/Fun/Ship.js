@@ -2,9 +2,6 @@ const Command = require('../../structures/Command.js');
 const { MessageEmbed, Client } = require('discord.js');
 const shipSchema = require('../../Schemas/ship.js');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bradn:eorXgV34icTCFwWr@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority', {
-    useNewUrlParser: true
-});
 
 module.exports = class extends Command {
 

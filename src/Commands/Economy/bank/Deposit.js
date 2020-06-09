@@ -1,10 +1,7 @@
 const Command = require('../../../structures/Command.js');
+const { mongo } = require('../../../../config.json');
 const { MessageEmbed } = require('discord.js');
-const money = require('../../../Schemas/money.js');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bradn:eorXgV34icTCFwWr@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority', {
-    useNewUrlParser: true
-});
 
 module.exports = class extends Command {
 

@@ -1,7 +1,8 @@
 const { Client, Collection } = require('discord.js');
 const Util = require('./Util.js');
+const { mongo } = require('../../config.json');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bradn:eorXgV34icTCFwWr@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://bradn:${mongo}@cluster0-d992c.azure.mongodb.net/taichi?retryWrites=true&w=majority`, {
     useNewUrlParser: true
 });
 const addCoins = require('../Functions/addCoins.js');
