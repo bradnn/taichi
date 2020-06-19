@@ -2,6 +2,7 @@ const Command = require('../../../structures/Command.js');
 const { mongo } = require('../../../../config.json');
 const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
+const money = require('../../../Schemas/money.js');
 
 module.exports = class extends Command {
 

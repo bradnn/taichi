@@ -19,7 +19,7 @@ module.exports = class Util {
     }
 
     async loadCommands() {
-        return glob(`${this.directory}commands/**/*.js`).then(commands => {
+        return glob(`${this.directory}Commands/**/*.js`).then(commands => {
             for (const commandFile of commands) {
                 delete require.cache[commandFile];
                 const { name } = path.parse(commandFile);
@@ -35,5 +35,14 @@ module.exports = class Util {
                 }
             }
         });
+    }
+
+    trimArray(arr, maxLen = 10) {
+        if(arr.length > maxLen) {
+            const len = arr.length - maxLen;
+            arr = arr.slice(0, maxLen);
+            arr.push(`${len} more...`);
+        }
+        return arr;
     }
 };

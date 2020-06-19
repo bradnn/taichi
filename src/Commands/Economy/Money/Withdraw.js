@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
     // eslint-disable-next-line no-unused-vars
     async run(message, args) {
-        var amount = args[0];
+        var amount = parseInt(args[0]);
 
         if(!args[0]){
             message.channel.send(`Please provide a number.`);

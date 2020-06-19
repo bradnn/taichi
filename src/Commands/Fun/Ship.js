@@ -7,7 +7,7 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            aliases: ['thotrate']
+            aliases: ['howcute']
         });
     }
 

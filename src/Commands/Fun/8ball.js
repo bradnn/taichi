@@ -32,7 +32,7 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            aliases: ['speak']
+            aliases: ['9ball']
         });
     }
 

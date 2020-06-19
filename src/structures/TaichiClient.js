@@ -33,11 +33,11 @@ module.exports = class TaichiClient extends Client {
 
             if (!message.guild || message.author.bot) return;
 
-            if(Math.floor(Math.random()*999) + 1 > 980){
-                if(Math.floor(Math.random()*999) + 1 > 999){
+            if(Math.floor(Math.random()*999) + 1 > 990){
+                if(Math.floor(Math.random()*999) + 1 > 750){
                     let coinamount = Math.floor(Math.random()*125) + 10;
     
-                    addCoins(message.author.id, amount);
+                    addCoins(message.author.id, coinamount);
                     addBoxes(message.author.id, 1, "basic");
                     message.channel.send(`** \`LUCKY\` ** ${message.author.username} just found ${coinamount} coins and 1 basic lootbox while chatting!`);
                 }else{
@@ -53,7 +53,7 @@ module.exports = class TaichiClient extends Client {
             const prefix = message.content.match(mentionRegexPrefix) ?
                 message.content.match(mentionRegexPrefix)[0] : this.prefix; // condition ? true : false
 
-            if(!message.content.startsWith(prefix)) return;
+            if (!message.content.startsWith(prefix)) return;
 
             // eslint-disable-next-line no-unused-vars
             const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
